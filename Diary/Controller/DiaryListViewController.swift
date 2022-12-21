@@ -19,7 +19,14 @@ final class DiaryListViewController: UICollectionViewController {
         configureDiariesWithSampleData()
         configureCollectionViewLayout()
         configureDatasource()
-//        updateSnapshot()
+        updateSnapshot()
+    }
+
+    private func configureNavigationItem() {
+        navigationItem.title = "일기장"
+
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(didPressAddButton))
+        navigationItem.rightBarButtonItem = addButton
     }
 }
 
@@ -32,25 +39,17 @@ extension DiaryListViewController {
         diaries = sampleDiaries
     }
 
-    private func configureNavigationItem() {
-        navigationItem.title = "일기장"
-
-        let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem = button
-    }
-
     private func configureCollectionViewLayout() {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
+                                              heightDimension: .estimated(75))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(75))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                     subitems: [item])
+                                               heightDimension: .estimated(75))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
 
         let layout = UICollectionViewCompositionalLayout(section: section)
         collectionView.collectionViewLayout = layout
@@ -86,5 +85,13 @@ extension DiaryListViewController {
 
     private func diary(for id: Diary.ID) -> Diary? {
         return diaries.first(where: { diary in diary.id == id })
+    }
+}
+
+extension DiaryListViewController {
+    @objc private func didPressAddButton(_ sender: UIBarButtonItem) {
+        let newDiary = Diary(title: "", body: "", createdAt: Date().timeIntervalSince1970)
+        let viewController = DiaryDetailViewController(diary: newDiary, isEditable: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

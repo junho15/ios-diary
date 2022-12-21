@@ -18,6 +18,9 @@
 		EB84FA3D295147260056999D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = EB84FA3C295147260056999D /* .swiftlint.yml */; };
 		EB84FA4029518AFE0056999D /* DiaryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FA3F29518AFE0056999D /* DiaryListViewController.swift */; };
 		EB84FA43295193220056999D /* DiaryListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FA42295193220056999D /* DiaryListContentView.swift */; };
+		EB84FA452951F9C80056999D /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FA442951F9C80056999D /* DiaryDetailView.swift */; };
+		EB84FA4729520B310056999D /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FA4629520B310056999D /* DiaryDetailViewController.swift */; };
+		EB84FA4A29528BB60056999D /* Locale+preferredLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FA4929528BB60056999D /* Locale+preferredLocale.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		EB84FA3C295147260056999D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		EB84FA3F29518AFE0056999D /* DiaryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListViewController.swift; sourceTree = "<group>"; };
 		EB84FA42295193220056999D /* DiaryListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListContentView.swift; sourceTree = "<group>"; };
+		EB84FA442951F9C80056999D /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
+		EB84FA4629520B310056999D /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
+		EB84FA4929528BB60056999D /* Locale+preferredLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+preferredLocale.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				EB84FA3F29518AFE0056999D /* DiaryListViewController.swift */,
+				EB84FA4629520B310056999D /* DiaryDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -62,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				EB84FA41295192DE0056999D /* ContentViews */,
+				EB84FA442951F9C80056999D /* DiaryDetailView.swift */,
 				C739AE2A284DF28600741E8F /* Main.storyboard */,
 				C739AE32284DF28600741E8F /* LaunchScreen.storyboard */,
 			);
@@ -108,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				09D5B5F229514F0500B5DFEC /* Model */,
+				EB84FA4829528B5C0056999D /* Extensions */,
 				09D5B5F129514EFC00B5DFEC /* View */,
 				09D5B5F029514EED00B5DFEC /* Controller */,
 				C739AE24284DF28600741E8F /* AppDelegate.swift */,
@@ -124,6 +133,14 @@
 				EB84FA42295193220056999D /* DiaryListContentView.swift */,
 			);
 			path = ContentViews;
+			sourceTree = "<group>";
+		};
+		EB84FA4829528B5C0056999D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EB84FA4929528BB60056999D /* Locale+preferredLocale.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		ED24E6859E993530CACA1FC3 /* Pods */ = {
@@ -253,10 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB84FA4A29528BB60056999D /* Locale+preferredLocale.swift in Sources */,
 				EB84FA43295193220056999D /* DiaryListContentView.swift in Sources */,
+				EB84FA452951F9C80056999D /* DiaryDetailView.swift in Sources */,
 				09D5B5F4295150E700B5DFEC /* Diary.swift in Sources */,
 				C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */,
 				C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */,
+				EB84FA4729520B310056999D /* DiaryDetailViewController.swift in Sources */,
 				EB84FA4029518AFE0056999D /* DiaryListViewController.swift in Sources */,
 				C739AE2F284DF28600741E8F /* Diary.xcdatamodeld in Sources */,
 			);
@@ -415,7 +435,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -444,7 +464,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

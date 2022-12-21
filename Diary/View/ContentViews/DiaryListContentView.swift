@@ -11,7 +11,7 @@ final class DiaryListContentView: UIView, UIContentView {
     struct Configuration: UIContentConfiguration {
         var title: String?
         var body: String?
-        var createdAt: Int?
+        var createdAt: Double?
 
         func makeContentView() -> UIView & UIContentView {
             return DiaryListContentView(self)
@@ -49,7 +49,7 @@ final class DiaryListContentView: UIView, UIContentView {
         configureCreatedAtLabelText(with: configuration.createdAt)
     }
 
-    private func configureCreatedAtLabelText(with createdAt: Int?) {
+    private func configureCreatedAtLabelText(with createdAt: Double?) {
         guard let createdAt = createdAt else {
             createdAtLabel.text = nil
             return
@@ -59,7 +59,7 @@ final class DiaryListContentView: UIView, UIContentView {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
-        formatter.locale = Locale.current
+        formatter.locale = Locale.preferredLocale
         let dateText = formatter.string(from: date)
 
         createdAtLabel.text = dateText
@@ -90,14 +90,15 @@ final class DiaryListContentView: UIView, UIContentView {
         stackView.spacing = 10
         addSubview(stackView)
 
+        let spacing = CGFloat(10)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing)
         ])
         createdAtLabel.setContentCompressionResistancePriority(.defaultHigh + 1, for: .horizontal)
     }
