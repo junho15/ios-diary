@@ -29,6 +29,10 @@ final class DiaryDetailViewController: UIViewController {
         configureSubViews()
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
     private func configureNavigationItem() {
         if let createdAt = diary?.createdAt {
             let date = Date(timeIntervalSince1970: TimeInterval(createdAt))
@@ -48,12 +52,11 @@ final class DiaryDetailViewController: UIViewController {
         diaryDetailView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(diaryDetailView)
 
-        let safeArea = view.safeAreaLayoutGuide
         let spacing = CGFloat(10)
         NSLayoutConstraint.activate([
-            diaryDetailView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            diaryDetailView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: spacing),
-            diaryDetailView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -spacing),
+            diaryDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            diaryDetailView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
+            diaryDetailView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
             diaryDetailView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
         ])
     }

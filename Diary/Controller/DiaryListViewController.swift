@@ -86,12 +86,26 @@ extension DiaryListViewController {
     private func diary(for id: Diary.ID) -> Diary? {
         return diaries.first(where: { diary in diary.id == id })
     }
+
+    private func showDetail(diary: Diary) {
+        let viewController = DiaryDetailViewController(diary: diary, isEditable: false)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if let diaryID = dataSource.itemIdentifier(for: indexPath),
+           let diary = diary(for: diaryID) {
+            showDetail(diary: diary)
+        }
+        return false
+    }
 }
 
 extension DiaryListViewController {
     @objc private func didPressAddButton(_ sender: UIBarButtonItem) {
         let newDiary = Diary(title: "", body: "", createdAt: Date().timeIntervalSince1970)
         let viewController = DiaryDetailViewController(diary: newDiary, isEditable: true)
-        navigationController?.pushViewController(viewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
     }
 }
