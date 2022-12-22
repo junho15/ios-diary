@@ -24,6 +24,7 @@ final class DiaryDetailView: UIView {
         super.init(frame: .zero)
         backgroundColor = .white
         configureSubViews()
+        configureSubviewsText(with: diary)
     }
 
     required init?(coder: NSCoder) {

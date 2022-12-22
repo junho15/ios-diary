@@ -15,7 +15,6 @@ final class DiaryDetailViewController: UIViewController {
     init(diary: Diary?, isEditable: Bool) {
         self.diary = diary
         diaryDetailView = DiaryDetailView(diary: diary, isEditable: isEditable)
-        diaryDetailView.diary = diary
         super.init(nibName: nil, bundle: nil)
     }
 
