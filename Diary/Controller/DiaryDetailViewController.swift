@@ -10,6 +10,7 @@ import UIKit
 final class DiaryDetailViewController: UIViewController {
     private let diaryDetailView: DiaryDetailView
     private var diary: Diary?
+    private var keyboardConstraint: NSLayoutConstraint!
 
     init(diary: Diary?, isEditable: Bool) {
         self.diary = diary
@@ -27,10 +28,9 @@ final class DiaryDetailViewController: UIViewController {
         view.backgroundColor = .white
         configureNavigationItem()
         configureSubViews()
-    }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     private func configureNavigationItem() {
@@ -56,8 +56,26 @@ final class DiaryDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             diaryDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             diaryDetailView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
-            diaryDetailView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
-            diaryDetailView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
+            diaryDetailView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
         ])
+        keyboardConstraint = diaryDetailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        keyboardConstraint.isActive = true
+    }
+}
+
+extension DiaryDetailViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    @objc private func keyboardWillShow(_ sender: NSNotification) {
+        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+                  return
+              }
+        keyboardConstraint.constant = -keyboardFrame.cgRectValue.height
+    }
+
+    @objc private func keyboardWillHide(_ sender: Notification) {
+        keyboardConstraint.constant = 0
     }
 }
